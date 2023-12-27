@@ -1,0 +1,282 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="HRMS.Layout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="css/img/yunic_favicon.png" rel="shortcut icon" type="image/x-icon" />
+    
+ <style>
+     .nav-sidebar{
+         line-height:3;
+     }
+ </style>
+
+ <style type="text/css">
+
+.sidebar li .submenu{ 
+	list-style: none; 
+	margin: 0; 
+	padding: 0; 
+	padding-left: 1rem; 
+	padding-right: 1rem;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: var(--bs-dark);
+}
+.sidebar .nav-link:hover {
+    color: var(--bs-primary);
+}
+
+.navlink {
+    font-weight: 500;
+    color: var(--bs-dark);
+}
+
+.navlink:hover {
+    color: var(--bs-primary);
+}
+
+</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/css/site.css" rel="stylesheet" />
+   
+    <script src="css/js/site.js"></script>
+   
+    <link href="css/lib/remixicon/fonts/remixicon.css" rel="stylesheet" />
+    <!-- Template CSS -->
+    <link href="css/assets/css/style.min.css" rel="stylesheet" />
+    <script src="css/lib/jquery/jquery.min.js"></script>
+    <!-- Template Scripts -->
+    <script src="css/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="css/lib/feathericons/feather.min.js"></script>
+    <script src="css/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="css/assets/js/script.js"></script>
+    <link href="css/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="css/js/bootstrap.min.js"></script>
+    <script src="css/js/sweetalert.js"></script>
+    <link href="css/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="css/js/jquery.dataTables.js"></script>
+    <link href="css/css/jquery.dataTables.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%-- new icon liks 07-07-23 --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.min.js"></script> 
+    <%--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <script>
+        $(document).ready(function () {
+            $('.datatable1').DataTable();
+        });
+    </script>
+    <script type="text/javascript">
+        debugger
+        document.addEventListener("DOMContentLoaded", function () {
+
+            document.querySelectorAll('.sidebar .nav-link').forEach(function (element) {
+
+                element.addEventListener('click', function (e) {
+
+                    let nextEl = element.nextElementSibling;
+                    let parentEl = element.parentElement;
+
+                    if (nextEl) {
+                        e.preventDefault();
+                        let mycollapse = new bootstrap.Collapse(nextEl);
+
+                        if (nextEl.classList.contains('show')) {
+                            mycollapse.hide();
+                        } else {
+                            mycollapse.show();
+                            // find other submenus with class=show
+                            var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                            // if it exists, then close all of them
+                            if (opened_submenu) {
+                                new bootstrap.Collapse(opened_submenu);
+                            }
+
+                        }
+                    }
+
+                });
+            })
+
+        });
+	// DOMContentLoaded  end
+    </script>
+
+    
+</head>
+<body class ="skin-base animate">
+    <form id="form1" runat="server">
+        <div>
+                    <div id="myDIV" class="sidebar" style="z-index: 10001;">
+        <div class="sidebar-header ">
+            <a href="#" class="sidebar-logo">
+                <img style="width:80%" src="css/img/yunic_logo1.png" />
+            </a>
+            
+
+           <%-- <a href="#" class="sidebar-logo-text">HRM<span>S</span></a>--%>
+        </div><!-- sidebar-header -->
+
+        <div class="sidebar-body">
+            <nav class="nav-sidebar">
+                <ul class="nav flex-column" id="nav_accordion">
+	                
+	                <li class="nav-item has-submenu">
+                        <%--<a class="nav-link" href="#"> Submenu links <i class="bi small bi-caret-down-fill"></i> </a>--%>
+		                <asp:LinkButton CssClass="nav-link" runat="server" ID="LinkButton1"><i data-feather="users"></i><span>HR</span><i style="margin-left: 60%;" class="bi small bi-caret-down-fill"></i></asp:LinkButton>
+                        <ul class="submenu collapse">
+			                <%--<li><a class="nav-link" href="#">Submenu item 1 </a></li>--%>
+		                    <li><asp:LinkButton OnClick="dashlink_Click" CssClass="navlink" runat="server" ID="dashlink"><span>Dashboard</span></asp:LinkButton></li>
+		                    <li><asp:LinkButton OnClick="Departmentlink_Click" CssClass="navlink" runat="server" ID="Departmentlink"><span>Departments</span></asp:LinkButton>  </li>
+                            <li><asp:LinkButton OnClick="Employeeslink_Click" CssClass="navlink" runat="server" ID="Employeeslink"><span>Employees</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="Timesheetlink_Click" CssClass="navlink" runat="server" ID="Timesheetlink"><span>Timesheet</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="Paylink_Click" CssClass="navlink" runat="server" ID="Paylink"><span>Pay Roll</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="Projectslink_Click" CssClass="navlink" runat="server" ID="Projectslink"><span>Projects</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="Leavelink_Click" CssClass="navlink" runat="server" ID="Leavelink"><span>Leave apply</span></asp:LinkButton></li>
+                            
+		                </ul>
+                        </li>
+                <li><asp:LinkButton  CssClass="nav-link" runat="server" ID="Accountslink"><i data-feather="package"></i><span>Accounts</span><i style="margin-left: 42%;" class="bi small bi-caret-down-fill"></i></asp:LinkButton></li>
+                <li><asp:LinkButton  CssClass="nav-link" runat="server" ID="Financelink"><i data-feather="layers"></i><span>Finance</span><i style="margin-left: 46%;" class="bi small bi-caret-down-fill"></i></asp:LinkButton></li>               
+                
+                    <li class="nav-item has-submenu">
+                    <asp:LinkButton  CssClass="nav-link" runat="server" ID="Warehousinglink"><i data-feather="home"></i><span>Warehousing</span><i style="margin-left: 30%;" class="bi small bi-caret-down-fill"></i></asp:LinkButton>
+                    <ul class="submenu collapse">
+			                <%--<li><a class="nav-link" href="#">Submenu item 1 </a></li>--%>
+		                    <li><asp:LinkButton OnClick="Catolink_Click" CssClass="navlink" runat="server" ID="Category"><span>Category</span></asp:LinkButton></li>
+		                    <li><asp:LinkButton OnClick="SubCatolink_Click" CssClass="navlink" runat="server" ID="SubCategory"><span>Sub Category</span></asp:LinkButton>  </li>
+                            <li><asp:LinkButton OnClick="Prodlink_Click" CssClass="navlink" runat="server" ID="Products"><span>Products</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="Dealerlink_Click" CssClass="navlink" runat="server" ID="Dealer"><span>Dealer</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="StockMngntlink_Click" CssClass="navlink" runat="server" ID="StockManagement"><span>StockOut</span></asp:LinkButton></li>
+                            <li><asp:LinkButton OnClick="Procurementlink_Click" CssClass="navlink" runat="server" ID="Procurement"><span>Procurement</span></asp:LinkButton></li> 
+                        <li><asp:LinkButton OnClick="Purchaserecieve_Click" CssClass="navlink" runat="server" ID="Purchaserecieve"><span>Purchase Recieve</span></asp:LinkButton></li>
+		                </ul>
+                </li>
+                <%--<li><asp:LinkButton OnClick="Joblink_Click" Style="display:none" runat="server" ID="Joblink"><i data-feather="package"></i><span>Job Allocation</span></asp:LinkButton>--%>
+                <li><asp:LinkButton  CssClass="nav-link" runat="server" ID="Logisticslink"><i data-feather="activity"></i><span>Logistics</span><i style="margin-left: 44%;" class="bi small bi-caret-down-fill"></i></asp:LinkButton>
+                <li><asp:LinkButton  CssClass="nav-link" runat="server" ID="Settingslink"><i data-feather="settings"></i><span>Settings</span><i style="margin-left: 46%;" class="bi small bi-caret-down-fill"></i></asp:LinkButton>
+                <%--<asp:LinkButton OnClick="Projectslink_Click" runat="server" ID="Projectslink"><i data-feather="cpu"></i><span>Projects</span></asp:LinkButton>
+                <asp:LinkButton OnClick="Leavelink_Click" runat="server" ID="Leavelink"><i data-feather="file-text"></i><span>Leave apply</span></asp:LinkButton>--%>
+               
+                
+</ul>
+            </nav>
+            <%--@*<hr>
+
+                <nav class="nav-sidebar">
+
+                </nav>*@--%>
+
+            <hr>
+
+         <%--   @*<nav class="nav-sidebar">
+                    <a class="nav-link"><i data-feather="activity"></i><span>Activity Logs</span></a>
+                    <a class="nav-link"><i data-feather="settings"></i><span>Preferences</span></a>
+                    <a class="nav-link"><i data-feather="help-circle"></i><span>Help &amp; Support</span></a>
+                    <a class="nav-link"><i data-feather="edit-3"></i><span>Give Feedback</span></a>
+                </nav>*@--%>
+        </div><!-- sidebar-body -->
+        <div class="sidebar-footer">
+            <a class="avatar online"><span class="avatar-initial"><asp:Label runat="server" ID="userfirstletter"></asp:Label></span></a>
+            <div class="avatar-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 class="col-sm-12" style="padding:0"><asp:Label runat="server" ID="usr"></asp:Label>
+                        <asp:LinkButton ID="usersignout" class="fa fa-sign-out" runat="server" OnClick="signout_Click" style="margin-left:89%"></asp:LinkButton>
+                       </h6>
+
+                </div>
+                <span>Admin</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="content-header ">
+            <a id="contentMenu" href="#" class="content-menu d-none d-lg-flex"><i data-feather="menu"></i></a>
+            <a id="mobileMenu" href="#" class="content-menu d-lg-none"><i data-feather="menu"></i></a>
+           <%-- @* <label class="menuname">@ViewBag.Menuname</label>*@--%>
+            <button type="button" class="btn btn-theme" data-toggle="modal" data-target="#exampleModalLong">
+                Theme
+            </button>
+        </div>
+
+        <main role="main" class="pb-3">
+            <div class="content-body">
+                <div style=" padding: 15px; border-radius: 10px; box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;background:white;margin-bottom:50px">
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" style="z-index:10003" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Navigation Skins</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <nav id="navigationSkins" class="nav">
+                                        <a data-skin="base" class="nav-link active">Base</a>
+                                       <%-- @*<a href="" data-skin="blue" class="nav-link">Blue/White</a>*@--%>
+                                        <a data-skin="dark" class="nav-link">Dark</a>
+                                        <a data-skin="red" class="nav-link">Red/Dark</a>
+                                        <a data-skin="indigo" class="nav-link">White/Indigo</a>
+                                        <a data-skin="gradient" class="nav-link">White/Gradient</a>
+                                    </nav>
+                                </div>
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        Navigation Styles
+                                    </h5>
+                                </div>
+
+                                <div class="modal-body">
+                                    <nav id="navigationStyles" class="nav">
+                                        <a data-style="base" class="nav-link active">Base</a>
+                                        <a data-style="one" class="nav-link">Style 01</a>
+                                        <a data-style="two" class="nav-link">Style 02</a>
+                                        <a data-style="three" class="nav-link">Style 03</a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+         
+            </asp:ContentPlaceHolder>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-top footer position-fixed text-muted" style="box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px; background: white; height: 30px;line-height:30px;">
+        <div class="container text-center">
+            &copy; 2023 - YUNIK SOLUTIONZ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+            
+    <script src="css/js/site.js" asp-append-version="true"></script>
+ 
+        </div>
+    </form>
+</body>
+<asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</html>
